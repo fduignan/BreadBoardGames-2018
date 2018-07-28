@@ -19,7 +19,7 @@ void SpriteDesigner(void)
     int SpriteWidth, SpriteHeight;   
     uint16_t BrushColour;
     int cellsize;
-    uint16_t Image[SPRITE_WIDTH*SPRITE_HEIGHT]; // sprite pixel buffer        
+    uint16_t *Image=Console.Storage.nvm_data.InvaderSprite;// sprite pixel buffer        
     int PixelIndex = 0;
     int ColourIndex = 0;
     #define PALLETTE_ROW_COUNT 2
@@ -31,10 +31,13 @@ void SpriteDesigner(void)
     int PalletteYOffset = (cellsize*SPRITE_HEIGHT)+4;
     
     // Make a copy of the sprite in RAM first
-    while (PixelIndex < (sizeof(Image)/sizeof(uint16_t)))
+    if (!Console.Storage.DataPresent())
     {
-        Image[PixelIndex]=InvaderImage[PixelIndex];        
-        PixelIndex++;
+        while (PixelIndex < (sizeof(InvaderImage)/sizeof(uint16_t)))
+        {
+            Image[PixelIndex]=InvaderImage[PixelIndex];        
+            PixelIndex++;
+        }
     }
     PixelIndex = 0;
     Console.fillRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);   // black out the screen
@@ -111,9 +114,10 @@ void SpriteDesigner(void)
                 return;
                 break;
             }
-            case 2 : {
+            case 4 : {
                 // OK (Save)
-                
+                Console.Storage.writeData();
+                Done=1;
                 break;
             }               
         }                                                                     

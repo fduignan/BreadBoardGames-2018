@@ -6,7 +6,7 @@
 #include "display.h"
 #include "sound.h"
 #include "controller.h"
-
+#include "storage.h"
 #define COLOUR(R,G,B) RGBToWord(R,G,B)
 
 class console
@@ -29,7 +29,8 @@ public:
     timer Timer;
     serial Serial;
     sound Sound;
-    controller Controller;            
+    controller Controller;     
+    storage Storage;
     
 // various functions that need to be declared but are handled internally (don't call them)    
     console(){}; // Default constructor does nothing.

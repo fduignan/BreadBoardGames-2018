@@ -1,7 +1,8 @@
 /* useful reference: www.linuxselfhelp.com/gnu/ld/html_chapter/ld_toc.html */
 MEMORY
 {
-    flash : org = 0x08000000, len = 64k
+    flash : org = 0x08000000, len = 63k  /* reduce size of flash by 1k */
+    nvm : org = 0x08000000+63k, len = 1k /* reserve 1k at then end of ROM for persistent data storage */
     ram : org = 0x20000000, len = 20k
 }
   
@@ -39,7 +40,8 @@ SECTIONS
         
         *(.rodata);
         *(.comment);
-        *(.ARM.attributes);
+        *(.ARM.attributes);        
+        
         } >flash
         
 	. = ORIGIN(ram);
@@ -56,4 +58,11 @@ SECTIONS
 	    . = ALIGN(4);
 	} > ram
 	BSS_END = .;
+	
+	. = ORIGIN(nvm);
+	/* persistent storage area follows everything else */            
+	.persistent : {    
+            PERSISTENT_DATA_START = .;	
+	} > nvm
+	
 }

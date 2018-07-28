@@ -1,13 +1,5 @@
 #include <stdint.h>
-typedef struct {
-    uint16_t TouchXMin;
-    uint16_t TouchYMin;
-    uint16_t TouchXMax;
-    uint16_t TouchYMax;
-    uint16_t Sprite_Width;
-    uint16_t Sprite_Height;
-    uint16_t Sprite_Pixels[0];
-} nvm_data_type;
+
 class controller
 {
 public:
@@ -25,5 +17,4 @@ private:
     uint16_t TouchYMin;
     uint16_t TouchXMax;
     uint16_t TouchYMax;
-    nvm_data_type * nvm_data;
 };

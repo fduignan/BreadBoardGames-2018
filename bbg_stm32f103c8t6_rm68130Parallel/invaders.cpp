@@ -11,17 +11,23 @@ void playInvaders()
   // Variables for the Invaders game
 #define MAX_INVADERS 10
 #define MAX_INVADER_LEVELS 4
+  const uint16_t *IvdImage=InvaderImage;
+  if (Console.Storage.DataPresent())
+  {
+      // If the user has designed their own invader sprite use it
+      IvdImage=Console.Storage.nvm_data.InvaderSprite;
+  }      
   sprite  Invaders[MAX_INVADERS] = {
-    { InvaderImage, 3, 3, 10, 12   },
-    { InvaderImage, 23, 3, 10, 12  },
-    { InvaderImage, 43, 3, 10, 12  },
-    { InvaderImage, 63, 3, 10, 12  },
-    { InvaderImage, 83, 3, 10, 12  },
-    { InvaderImage, 103, 3, 10, 12 },
-    { InvaderImage, 123, 3, 10, 12 },
-    { InvaderImage, 143, 3, 10, 12 },
-    { InvaderImage, 163, 3, 10, 12 },
-    { InvaderImage, 183, 3, 10, 12 }
+    { IvdImage, 3, 3, 10, 12   },
+    { IvdImage, 23, 3, 10, 12  },
+    { IvdImage, 43, 3, 10, 12  },
+    { IvdImage, 63, 3, 10, 12  },
+    { IvdImage, 83, 3, 10, 12  },
+    { IvdImage, 103, 3, 10, 12 },
+    { IvdImage, 123, 3, 10, 12 },
+    { IvdImage, 143, 3, 10, 12 },
+    { IvdImage, 163, 3, 10, 12 },
+    { IvdImage, 183, 3, 10, 12 }
   };
   sprite  Defender(DefenderImage, SCREEN_WIDTH/2, SCREEN_HEIGHT-30, 10, 6);
 #define MAX_DEFENDER_MISSILES 5
@@ -187,6 +193,7 @@ void playInvaders()
                 Console.print("Fire to restart", 15, 8, 120, RGBToWord(0xff, 0xff, 0), RGBToWord(0, 0, 0));
                 while (!FirePressed())
                     Console.Timer.sleep(10);
+                while (FirePressed());
                 return;
             }
             Console.fillRectangle(SCREEN_WIDTH-5*15, SCREEN_HEIGHT-10, 120, 10, 0);  // wipe out the remaining lives area
@@ -268,6 +275,7 @@ void playInvaders()
   Console.print("Fire to restart", 15, 8, 120, RGBToWord(0xff, 0xff, 0), RGBToWord(0, 0, 0xff));
   while (!FirePressed())
       Console.Timer.sleep(10);
+  while (FirePressed());
   return;
 }
 

@@ -40,7 +40,7 @@ void loop()
     Console.print("Games!", 5, SCREEN_WIDTH/3, 90, RGBToWord(0xff, 0xff, 0x0), 0);
     Console.print("Left for Brici", 14, 5, 120, RGBToWord(0xff, 0x3f, 0x3f), 0);
     Console.print("Right for Galaga", 16, 5, 140, RGBToWord(0x1f, 0xff, 0x1f), 0);    
-    Console.print("Fire for Sprite design", 22, 5, 160, RGBToWord(0x1f, 0xff, 0x1f), 0);    
+    Console.print("Fire for design", 22, 5, 160, RGBToWord(0x1f, 0xff, 0x1f), 0);    
     Console.print("web:ioprog.com/bbg", 18, 5, 200, RGBToWord(0xff, 0xff, 0xff), 0);
     Console.Sound.playMelody(StartupMelodyTones, StartupMelodyTimes,STARTUP_MELODY_NOTES);
     while (GameStarted == 0)

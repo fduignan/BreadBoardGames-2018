@@ -7,7 +7,8 @@ void console::begin()
     Serial.begin();
     Controller.begin();
     Sound.begin();
-    Display.begin(Timer);
+    Storage.begin();      
+    Display.begin(Timer);    
 // need to attach a timer callback for the sound system so that it can manage playback
     Timer.attach(Sound.ms_callback);
     random_seed();
