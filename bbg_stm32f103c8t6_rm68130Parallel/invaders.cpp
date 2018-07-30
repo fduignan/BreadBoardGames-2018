@@ -3,6 +3,7 @@
 #include "sprite.h"
 #include "console.h"
 #include "invaders.h"
+#include "storage.h"
 
 void Explode(uint16_t X, uint16_t Y);
 int FirePressed();
@@ -11,7 +12,7 @@ void playInvaders()
   // Variables for the Invaders game
 #define MAX_INVADERS 10
 #define MAX_INVADER_LEVELS 4
-  const uint16_t *IvdImage=InvaderImage;
+  const uint16_t *IvdImage=Console.Storage.nvm_data.InvaderSprite;
   if (Console.Storage.DataPresent())
   {
       // If the user has designed their own invader sprite use it

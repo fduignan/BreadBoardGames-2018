@@ -26,7 +26,7 @@ void playInvaders();
 #define BLUE COLOUR(0,0,255)
 #endif 
 #define IVDR COLOUR(0xff,0xff,0x00)
-const uint16_t InvaderImage[] = { 
+const uint16_t DefaultInvaderImage[] = { 
     BGND,BGND,BGND,BGND,BGND,BGND,BGND,BGND,BGND,BGND,
     BGND,BGND,BGND,BGND,IVDR,IVDR,BGND,BGND,BGND,BGND,
     BGND,BGND,BGND,IVDR,IVDR,IVDR,IVDR,BGND,BGND,BGND,

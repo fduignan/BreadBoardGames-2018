@@ -1,7 +1,16 @@
 // persistent storage management
+#ifndef __STORAGE_H
+#define __STORAGE_H
 #include <stdint.h>
+#include "sound.h"
+
+
 typedef struct {
-    uint16_t InvaderSprite[10*16]; // User custom invader sprite
+    uint16_t InvaderSprite[10*16]; // User custom invader sprite    
+    uint16_t StartupJingleNotes[STARTUP_JINGLE_LENGTH];
+    uint16_t StartupJingleTimes[STARTUP_JINGLE_LENGTH];
+    uint32_t HighScoreInvaders;
+    uint32_t HighScoreBreakout;
 } nvm_data_type;
 
 class storage
@@ -39,3 +48,5 @@ private:
     uint32_t FindMagicNumber();
 
 };
+
+#endif

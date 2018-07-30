@@ -6,6 +6,7 @@
 #include "brici.h"
 #include "invaders.h"
 #include "spritedesigner.h"
+#include "jingledesign.h"
 #define BGND COLOUR(0,0,0)
 #define IVDR COLOUR(0xff,0xff,0x00)
 
@@ -27,9 +28,7 @@ void setup()
 }
 int x;
 int y=90;
-#define STARTUP_MELODY_NOTES 10
-const uint32_t StartupMelodyTones[STARTUP_MELODY_NOTES]={1000,500,1000,500,1000,500,1000,500,1000,500};
-const uint32_t StartupMelodyTimes[STARTUP_MELODY_NOTES]={200,200,200,200,200,200,200,200,200,200};
+
 void loop()
 {    
     
@@ -40,9 +39,9 @@ void loop()
     Console.print("Games!", 5, SCREEN_WIDTH/3, 90, RGBToWord(0xff, 0xff, 0x0), 0);
     Console.print("Left for Brici", 14, 5, 120, RGBToWord(0xff, 0x3f, 0x3f), 0);
     Console.print("Right for Galaga", 16, 5, 140, RGBToWord(0x1f, 0xff, 0x1f), 0);    
-    Console.print("Fire for design", 22, 5, 160, RGBToWord(0x1f, 0xff, 0x1f), 0);    
+    Console.print("Fire for design", 15, 5, 160, RGBToWord(0x1f, 0x1f, 0xff), 0);    
     Console.print("web:ioprog.com/bbg", 18, 5, 200, RGBToWord(0xff, 0xff, 0xff), 0);
-    Console.Sound.playMelody(StartupMelodyTones, StartupMelodyTimes,STARTUP_MELODY_NOTES);
+    Console.Sound.playMelody(Console.Storage.nvm_data.StartupJingleNotes, Console.Storage.nvm_data.StartupJingleTimes,STARTUP_JINGLE_LENGTH);
     while (GameStarted == 0)
     {
         if (Console.Controller.getButtonState()==1)
@@ -58,7 +57,8 @@ void loop()
         if (Console.Controller.getButtonState()==4)
         {
             GameStarted = 1;
-            SpriteDesigner();      
+            //SpriteDesigner();      
+            JingleDesigner();
         }
         Console.Timer.sleep(100);
     }

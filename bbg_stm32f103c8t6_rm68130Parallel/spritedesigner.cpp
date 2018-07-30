@@ -29,16 +29,7 @@ void SpriteDesigner(void)
     cellsize=(SCREEN_WIDTH * 8 / 10) / SPRITE_WIDTH;
     int Done=0;    
     int PalletteYOffset = (cellsize*SPRITE_HEIGHT)+4;
-    
-    // Make a copy of the sprite in RAM first
-    if (!Console.Storage.DataPresent())
-    {
-        while (PixelIndex < (sizeof(InvaderImage)/sizeof(uint16_t)))
-        {
-            Image[PixelIndex]=InvaderImage[PixelIndex];        
-            PixelIndex++;
-        }
-    }
+        
     PixelIndex = 0;
     Console.fillRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);   // black out the screen
     // Draw a magnified version of the sprite
@@ -61,7 +52,7 @@ void SpriteDesigner(void)
             ColourIndex++;
         }
     } 
-    Console.drawRectangle(0, 0, SCREEN_WIDTH-1, SCREEN_HEIGHT-1, RGBToWord(0xff,0xff,0));
+    Console.print("Cancel Save Restore",sizeof("Cancel Save Restore")-1,0,SCREEN_HEIGHT-8,RGBToWord(0xff,0xff,0xff),0);
     ColourIndex = 0;
     while (!Done)
     {             
@@ -75,7 +66,6 @@ void SpriteDesigner(void)
         if ( (Vx < SCREEN_WIDTH) && (Vy < SCREEN_HEIGHT) )
         {            
             
-            //Console.fillRectangle(Vx,Vy,2,2,RGBToWord(0xff,0,0));            
             if ( (Vy >= PalletteYOffset) && ( Vy <= PalletteYOffset + 2*cellsize)  && (Vx < 11 * cellsize))                 
             {
                 // in colour pallette region
@@ -91,7 +81,6 @@ void SpriteDesigner(void)
                 row = (Vy / cellsize);
                 col = (Vx / cellsize);
                 PixelIndex = row * SPRITE_WIDTH + col;
-                //if (PixelIndex < (SPRITE_WIDTH * SPRITE_HEIGHT))
                 if ( (row < SPRITE_HEIGHT) && (col < SPRITE_WIDTH) )
                 {
                     // update image
@@ -101,9 +90,7 @@ void SpriteDesigner(void)
                     // update preview
                     Console.putImage(SPRITE_WIDTH*cellsize+11, (SCREEN_HEIGHT/2) - 2*cellsize, SPRITE_WIDTH, SPRITE_HEIGHT, Image);
                 }
-            }
-            
-            
+            }                        
         }            
         Buttons = Console.Controller.getButtonState(); // wait for the user to push a button 
         Console.Timer.sleep(50);         
@@ -111,7 +98,19 @@ void SpriteDesigner(void)
         {
             case 1 : {
                 // Cancel
-                return;
+                Done=1;
+                break;
+            }
+            case 2 : {
+                // restore original
+                PixelIndex = 0;
+                while (PixelIndex < (sizeof(Console.Storage.nvm_data.InvaderSprite)/sizeof(uint16_t)))
+                {
+                    Image[PixelIndex]=DefaultInvaderImage[PixelIndex];        
+                    PixelIndex++;
+                }
+                Console.Storage.writeData();
+                Done=1;
                 break;
             }
             case 4 : {

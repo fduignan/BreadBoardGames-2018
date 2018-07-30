@@ -18,7 +18,7 @@ void sound::begin()
     // Connect up Timer 3 output
     TIM3->CCER |= BIT8;
 }
-void sound::playTone(uint32_t Frequency, uint32_t ms)
+void sound::playTone(uint16_t Frequency, uint16_t ms)
 {
  // Configure PB0 as Timer3 output
     GPIOB->CRL &=0xfffffff0;
@@ -52,7 +52,7 @@ int  sound::SoundPlaying()
     else        
         return 0;
 }
-void sound::playMelody(const uint32_t *Tones,const uint32_t *Times,int Len)
+void sound::playMelody(const uint16_t *Tones,const uint16_t *Times,int Len)
 {
     int Index;
     for (Index = 0; Index < Len; Index++)
