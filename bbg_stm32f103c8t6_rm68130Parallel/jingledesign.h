@@ -1,3 +1,0 @@
-// Jingle designer 
-
-void JingleDesigner();

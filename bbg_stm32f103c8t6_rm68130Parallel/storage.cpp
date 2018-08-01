@@ -1,6 +1,5 @@
 #include "storage.h"
 #include "stm32f103.h"
-#include "jingledesign.h"
 #include "invaders.h"
 #include <stdint.h>
 
@@ -14,19 +13,11 @@ void storage::begin()
         readData();
     }
     else
-    {
-        // create initial valid record based on default values
-        for (int i=0;i<STARTUP_JINGLE_LENGTH;i++)
-        {            
-            nvm_data.StartupJingleNotes[i] = DefaultStartupJingleTones[i];
-            nvm_data.StartupJingleTimes[i] = DefaultStartupJingleTimes[i];                        
-        }
+    {        
         for (int i=0;i<sizeof(DefaultInvaderImage)/sizeof(uint16_t);i++)
         {
             nvm_data.InvaderSprite[i]=DefaultInvaderImage[i];
-        }
-        nvm_data.HighScoreInvaders=0;
-        nvm_data.HighScoreBreakout=0;
+        }     
         writeData();
     }
 }

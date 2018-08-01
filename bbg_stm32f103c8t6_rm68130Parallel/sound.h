@@ -2,7 +2,7 @@
 #define __sound_h
 #include <stdint.h>
 #define STARTUP_JINGLE_LENGTH 16
-const uint16_t DefaultStartupJingleTones[STARTUP_JINGLE_LENGTH]={1000,500,1000,500,1000,500,1000,500,1000,500,1000,500,1000,500,1000,500};
+const uint16_t DefaultStartupJingleTones[STARTUP_JINGLE_LENGTH]={1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768};
 const uint16_t DefaultStartupJingleTimes[STARTUP_JINGLE_LENGTH]={200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200};
 class sound
 {

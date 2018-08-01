@@ -6,7 +6,6 @@
 #include "brici.h"
 #include "invaders.h"
 #include "spritedesigner.h"
-#include "jingledesign.h"
 #define BGND COLOUR(0,0,0)
 #define IVDR COLOUR(0xff,0xff,0x00)
 
@@ -41,7 +40,7 @@ void loop()
     Console.print("Right for Galaga", 16, 5, 140, RGBToWord(0x1f, 0xff, 0x1f), 0);    
     Console.print("Fire for design", 15, 5, 160, RGBToWord(0x1f, 0x1f, 0xff), 0);    
     Console.print("web:ioprog.com/bbg", 18, 5, 200, RGBToWord(0xff, 0xff, 0xff), 0);
-    Console.Sound.playMelody(Console.Storage.nvm_data.StartupJingleNotes, Console.Storage.nvm_data.StartupJingleTimes,STARTUP_JINGLE_LENGTH);
+    Console.Sound.playMelody(DefaultStartupJingleTones, DefaultStartupJingleTimes,STARTUP_JINGLE_LENGTH);
     while (GameStarted == 0)
     {
         if (Console.Controller.getButtonState()==1)
@@ -57,8 +56,8 @@ void loop()
         if (Console.Controller.getButtonState()==4)
         {
             GameStarted = 1;
-            //SpriteDesigner();      
-            JingleDesigner();
+            SpriteDesigner();      
+            //JingleDesigner();
         }
         Console.Timer.sleep(100);
     }
