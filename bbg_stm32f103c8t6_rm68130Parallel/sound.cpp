@@ -30,7 +30,7 @@ void sound::playTone(uint16_t Frequency, uint16_t ms)
     // some pre-scaling of the input frequency is required.
     TIM3->CR1 &= ~BIT0; // disable the timer    
     TIM3->PSC = 72000000UL/65536UL;  // prescale so that the lowest frequency is 1Hz.
-    TIM3->ARR = (72000000UL/(uint32_t)(TIM3->PSC))/(Frequency);
+    TIM3->ARR = (72000000UL/(uint32_t)(TIM3->PSC))/((uint32_t)Frequency);
     TIM3->CCR3 = TIM3->ARR/2; // 50 % Duty cycle
     TIM3->CNT = 0;
     TIM3->CR1 |= BIT0; // enable the timer        
@@ -58,7 +58,7 @@ void sound::playMelody(const uint16_t *Tones,const uint16_t *Times,int Len)
     for (Index = 0; Index < Len; Index++)
     {
         while(SoundPlaying()); // wait for previous note to complete        
-        playTone(Tones[Index],Times[Index]);        
+        playTone(Tones[Index],Times[Index]);               
     }
 }
 void sound::ms_callback()

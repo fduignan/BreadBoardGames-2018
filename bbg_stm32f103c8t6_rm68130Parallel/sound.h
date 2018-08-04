@@ -1,9 +1,10 @@
 #ifndef __sound_h
 #define __sound_h
 #include <stdint.h>
-#define STARTUP_JINGLE_LENGTH 16
-const uint16_t DefaultStartupJingleTones[STARTUP_JINGLE_LENGTH]={1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768};
-const uint16_t DefaultStartupJingleTimes[STARTUP_JINGLE_LENGTH]={200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200};
+#define STARTUP_JINGLE_LENGTH 13
+
+const uint16_t DefaultStartupJingleTones[STARTUP_JINGLE_LENGTH]={3*1047,3*1319,3*1175,3*1397,3*1319,3*1568,3*1397,3*1047,3*1047,3*1568,3*1047,3*1568,3*1047};
+const uint16_t DefaultStartupJingleTimes[STARTUP_JINGLE_LENGTH]={200,200,200,200,200,200,200,200,200,200,200,200,200};
 class sound
 {
 public:
@@ -15,6 +16,6 @@ public:
     void playMelody(const uint16_t *Tones,const uint16_t *Times,int Len);
     static void ms_callback(void);
 private:
-    uint32_t tone_time;          
+    volatile uint32_t tone_time;          
 };
 #endif

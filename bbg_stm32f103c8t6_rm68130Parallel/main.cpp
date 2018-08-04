@@ -41,6 +41,12 @@ void loop()
     Console.print("Fire for design", 15, 5, 160, RGBToWord(0x1f, 0x1f, 0xff), 0);    
     Console.print("web:ioprog.com/bbg", 18, 5, 200, RGBToWord(0xff, 0xff, 0xff), 0);
     Console.Sound.playMelody(DefaultStartupJingleTones, DefaultStartupJingleTimes,STARTUP_JINGLE_LENGTH);
+    for (int i=0;i<STARTUP_JINGLE_LENGTH;i++)
+    {
+        Console.Serial.print(DefaultStartupJingleTones[i]);
+        Console.Serial.print("\r\n");
+        Console.Timer.sleep(100);
+    }
     while (GameStarted == 0)
     {
         if (Console.Controller.getButtonState()==1)

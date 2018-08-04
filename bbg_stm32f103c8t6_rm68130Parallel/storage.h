@@ -7,8 +7,6 @@
 
 typedef struct {
     uint16_t InvaderSprite[10*16]; // User custom invader sprite    
-    uint32_t HighScoreInvaders;
-    uint32_t HighScoreBreakout;
 } nvm_data_type;
 
 class storage
