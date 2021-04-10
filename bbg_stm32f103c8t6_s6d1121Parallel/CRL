@@ -1,0 +1,14 @@
+controller.cpp:    GPIOA->CRH = (GPIOA->CRH & 0x0fff0000) | 0x10001111;
+controller.cpp:    GPIOA->CRL &= 0xffffff00;   // configure pins for PA0 and PA1 as analog inputs
+display.cpp:    GPIOA->CRH = (GPIOA->CRH & 0x0fff0000) | 0x10001111;
+display.cpp:    GPIOA->BRR = BIT15;
+display.cpp:    GPIOA->BSRR = BIT15;
+display.cpp:    GPIOA->BRR = BIT8+BIT9+BIT10+BIT11;
+display.cpp:        GPIOA->BSRR = ((uint32_t)reverse_bits[b & 0x0f]) << 8;
+serial.cpp:    GPIOA->CRL &= ~(BIT8);
+serial.cpp:    GPIOA->CRL |= (BIT9);
+serial.cpp:    GPIOA->CRL &= ~(BIT10);
+serial.cpp:    GPIOA->CRL |= (BIT11);
+serial.cpp:    GPIOA->CRL &= ~(BIT13 + BIT12);
+serial.cpp:    GPIOA->CRL &= ~(BIT14);
+serial.cpp:    GPIOA->CRL |= (BIT15);	   
